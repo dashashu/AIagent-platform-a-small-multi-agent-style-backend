@@ -1,0 +1,3 @@
+[console_scripts]
+agent-chat = agent_platform.chat.main:main
+agent-mcp-ticketing = agent_platform.mcp.ticketing_server:main
