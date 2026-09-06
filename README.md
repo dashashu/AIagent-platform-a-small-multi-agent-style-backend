@@ -12,6 +12,15 @@ ships a separate MCP (Model Context Protocol) server for ticketing tools.
 This repo does not train models. Configure an OpenAI-compatible endpoint if you want
 LLM-based routing or richer answers.
 
+FLOWCHART:
+flowchart TD
+    User([User HTTP Request]) --> FastAPI[FastAPI App / LangServe]
+    FastAPI --> Runnable{LangChain Runnable Router}
+    Runnable -->|Incident Intent| IncidentAgent[Incident Handling Agent]
+    Runnable -->|Database Intent| CassandraAgent[Cassandra DB Agent]
+    IncidentAgent --> MCPServer[Isolated MCP Server]
+    MCPServer --> Ticketing[External Ticketing REST API]
+
 
 Requirements
 ------------
