@@ -20,7 +20,28 @@ flowchart TD
     Runnable -->|Database Intent| CassandraAgent[Cassandra DB Agent]
     IncidentAgent --> MCPServer[Isolated MCP Server]
     MCPServer --> Ticketing[External Ticketing REST API]
-
+(User HTTP Request)
+                        │
+                        ▼
+             [FastAPI App / LangServe]
+                        │
+                        ▼
+           /─────────────────────────\
+          │ LangChain Runnable Router │
+           \─────────────────────────/
+             │                     │
+      Incident Intent       Database Intent
+             │                     │
+             ▼                     ▼
+    [Incident Handling     [Cassandra DB Agent]
+          Agent]
+            │
+            ▼
+   [Isolated MCP Server]
+            │
+            ▼
+    [External Ticketing
+         REST API]
 
 Requirements
 ------------
